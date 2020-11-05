@@ -79,8 +79,22 @@ phrases["greetings"] = (greetings)
 # set user name
 user = "alex"
 
-database = pd.DataFrame(columns=['text', 'source', 'command', 'Country'])
-database
+# =============================================================================
+# IDA Databases
+# =============================================================================
+main_data_columns = ['text', 'time', 'source', 'command']
+main_data = pd.DataFrame(columns=main_data_columns)
+todo_data_columns = ['todo', 'date', 'priority']
+todo_data = pd.DataFrame(columns=todo_data_columns)
+note_data_columns = ['note', 'date']
+note_data = pd.DataFrame(columns=note_data_columns)
+
+
+note= pd.DataFrame([['hello']], columns=note_data_columns)
+note= pd.DataFrame(['test',],columns=note_data_columns)
+note_data= note_data.append(note)
+main_data
+
 
 # =============================================================================
 # IDA functions
@@ -91,48 +105,51 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
+def write(input, source, command, database, database_col):
+    data = pd.DataFrame([[input, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), '', '']], columns=database_col)
+    database= database.append(data)
+    return database
 
 def wishMe():
+    global main_data
     hour = datetime.datetime.now().hour
     if hour >= 0 and hour < 10:
-        speak(
+        sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['morning_greet'])}")
-        print(
-            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['morning_greet'])}")
+        speak(sentence)
+        main_data= write(sentence, main_data, main_data_columns)
     elif hour >= 10 and hour < 13:
-        speak(
+        sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['midday_greet'])}")
-        print(
-            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['midday_greet'])}")
+        speak(sentence)
+        main_data= write(sentence, main_data, main_data_columns)
     elif hour >= 13 and hour < 17:
-        speak(
+        sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['afternoon_greet'])}")
-        print(
-            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['afternoon_greet'])}")
+        speak(sentence)
+        main_data= write(sentence, main_data, main_data_columns)
     elif hour >= 17 and hour < 20:
-        speak(
+        sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['evening_greet'])}")
-        print(
-            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['evening_greet'])}")
+        speak(sentence)
+        main_data= write(sentence, main_data, main_data_columns)
     else:
-        speak(
+        sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['night_greet'])}")
-        print(
-            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['night_greet'])}")
+        speak(sentence)
+        main_data= write(sentence, main_data, main_data_columns)
 
 
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Listening...")
         audio = r.listen(source)
 
         try:
             statement = r.recognize_google(audio, language='en-EN')
-            print(f"user said:{statement}\n")
 
         except Exception as e:
-            speak("Excuse me {user}, i didn't get that")
+            speak(f"Excuse me {user}, i didn't get that")
             return "None"
         return statement
 
@@ -146,17 +163,26 @@ wishMe()
 
 
 if __name__ == '__main__':
+    global main_data
+
     wishMe()
+
     i = 0
+
     while True:
 
         if i == 0:
-            speak(random.choice(phrases["greetings"]))
+            sentence=random.choice(phrases["greetings"])
+            speak(sentence)
+            main_data= write(sentence, main_data, main_data_columns)
         else:
-            speak(random.choice(phrases["followers"]))
+            sentence=random.choice(phrases["followers"])
+            speak(sentence)
+            main_data= write(sentence, main_data, main_data_columns)
             i = i + 1
 
         statement = takeCommand().lower()
+        main_data= write(statement, main_data, main_data_columns)
         if statement == 0:
             continue
 
@@ -227,8 +253,8 @@ if __name__ == '__main__':
             speak(f"the time is {strTime}")
 
         elif 'who are you' in statement or 'what can you do' in statement:
-            speak('I am G-one version 1 point O your persoanl assistant. I am programmed to minor tasks like'
-                  'opening youtube,google chrome,gmail and stackoverflow ,predict time,take a photo,search wikipedia,predict weather'
+            speak('I am IDA version 1 point O your personal assistant. I am programmed to minor tasks like'
+                  'openingyour browser ,tell the time,take a photo,search wikipedia,predict weather'
                   'in different cities , get top headline news from times of india and you can ask me computational or geographical questions too!')
 
         elif "who made you" in statement or "who created you" in statement or "who discovered you" in statement:
