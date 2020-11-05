@@ -1,3 +1,7 @@
+# =============================================================================
+# Imports
+# =============================================================================
+
 import speech_recognition as sr
 import pyttsx3
 import datetime
@@ -13,6 +17,9 @@ import requests
 import random
 import pandas as pd
 
+# =============================================================================
+# Voice output settings
+# =============================================================================
 
 engine = pyttsx3.init('sapi5')
 wiki_wiki = wikipediaapi.Wikipedia('en')
@@ -34,15 +41,20 @@ voices = engine.getProperty('voices')  # getting details of current voice
 # changing index, changes voices. 1 for english, 0 for german
 engine.setProperty('voice', voices[2].id)
 
-morning_greet = ['Good Morning sunshine', 'good morning', 'morning', 'guten tag',
-                 'Rise and shine', 'Wakey, wakey, eggs and bakey', 'Good morning, Sleeping Beauty',
-                 'I thought you’d never wake up', 'Morning mi amigo!', 'Top o the mornin to ya', 'Rise and shine, its time for wine',
-                 'Good morning do you have coffee already', 'how was your night']
-midday_greet = ['Nice to hear from you', 'good to hear you',
-                'nice to hear you', 'its been a while']
+
+# =============================================================================
+# Speech library
+# =============================================================================
+
+morning_greet   = ['Good Morning sunshine', 'good morning', 'morning', 'guten tag',
+                   'Rise and shine', 'Wakey, wakey, eggs and bakey', 'Good morning, Sleeping Beauty',
+                   'I thought you’d never wake up', 'Morning mi amigo!', 'Top o the mornin to ya', 'Rise and shine, its time for wine',
+                   'Good morning do you have coffee already', 'how was your night']
+midday_greet    = ['Nice to hear from you', 'good to hear you',
+                   'nice to hear you', 'its been a while']
 afternoon_greet = ['Good Afternoon']
-evening_greet = ['Good Evening']
-night_greet = ['You are still up?']
+evening_greet   = ['Good Evening']
+night_greet     = ['You are still up?']
 greet_followers = ['anything else?', 'do you need help with something else?',
                    'what else can i do', 'do you need help with something different',
                    'Im ready if you are']
@@ -50,9 +62,10 @@ greet_questions = ['Do you need something from me?', 'Is there something I can h
                    'What are we doing today?', 'Do you need help?', 'You need something today?',
                    'What are our plans for today', 'Do you have some exiting tasks for me?', 'Let me brighten your day',
                    'Shoot']
-greetings = ['hi', 'hey', 'hello', 'whats up', 'hows it going',
-             'how are you', 'how have you been', 'jello']
+greetings       = ['hi', 'hey', 'hello', 'whats up', 'hows it going',
+                   'how are you', 'how have you been', 'jello']
 
+# create library and add phrases
 phrases = {}
 phrases["morning_greet"] = (morning_greet)
 phrases["midday_greet"] = (midday_greet)
@@ -63,10 +76,15 @@ phrases["greet_followers"] = (greet_followers)
 phrases["greet_questions"] = (greet_questions)
 phrases["greetings"] = (greetings)
 
-myname = "alex"
+# set user name
+user = "alex"
 
 database = pd.DataFrame(columns=['text', 'source', 'command', 'Country'])
 database
+
+# =============================================================================
+# IDA functions
+# =============================================================================
 
 
 def speak(text):
@@ -78,29 +96,29 @@ def wishMe():
     hour = datetime.datetime.now().hour
     if hour >= 0 and hour < 10:
         speak(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['morning_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['morning_greet'])}")
         print(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['morning_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['morning_greet'])}")
     elif hour >= 10 and hour < 13:
         speak(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['midday_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['midday_greet'])}")
         print(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['midday_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['midday_greet'])}")
     elif hour >= 13 and hour < 17:
         speak(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['afternoon_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['afternoon_greet'])}")
         print(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['afternoon_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['afternoon_greet'])}")
     elif hour >= 17 and hour < 20:
         speak(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['evening_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['evening_greet'])}")
         print(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['evening_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['evening_greet'])}")
     else:
         speak(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['night_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['night_greet'])}")
         print(
-            f" {random.choice(phrases['greetings'])} {myname}. {random.choice(phrases['night_greet'])}")
+            f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['night_greet'])}")
 
 
 def takeCommand():
@@ -114,13 +132,17 @@ def takeCommand():
             print(f"user said:{statement}\n")
 
         except Exception as e:
-            speak("Excuse me, i didn't get that")
+            speak("Excuse me {user}, i didn't get that")
             return "None"
         return statement
 
 
 speak("Ida is starting")
 wishMe()
+
+# =============================================================================
+# IDA main
+# =============================================================================
 
 
 if __name__ == '__main__':
