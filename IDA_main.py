@@ -89,6 +89,7 @@ todo_data = pd.DataFrame(columns=todo_data_columns)
 note_data_columns = ['note', 'date']
 note_data = pd.DataFrame(columns=note_data_columns)
 
+main_data
 
 # =============================================================================
 # IDA functions
@@ -148,6 +149,13 @@ def takeCommand():
             return "None"
         return statement
 
+def browser(page):
+    webbrowser.open_new_tab(f"https://www.{page}.com")
+    speak(f"{page} is open now")
+    time.sleep(5)
+
+webbrowser.register('firefox',None,\
+webbrowser.BackgroundBrowser("C://Program Files//Mozilla Firefox//firefox.exe"))
 
 speak("Ida is starting")
 wishMe()
@@ -170,124 +178,124 @@ if __name__ == '__main__':
         if i == 0:
             sentence=random.choice(phrases["greetings"])
             speak(sentence)
-            main_data= write(sentence, main_data, main_data_columns)
+            main_data= write(sentence,"IDA","greeting", main_data, main_data_columns)
         else:
             sentence=random.choice(phrases["followers"])
             speak(sentence)
-            main_data= write(sentence, main_data, main_data_columns)
+            main_data= write(sentence,"IDA","greetings_follower", main_data, main_data_columns)
             i = i + 1
 
         statement = takeCommand().lower()
-        main_data= write(statement, main_data, main_data_columns)
+        main_data= write(statement, "user","main_talk", main_data, main_data_columns)
         if statement == 0:
             continue
 
-        if "good bye" in statement or "ok bye" in statement or "stop" in statement:
-            speak('i am shutting down, Good bye')
-            print('i am shutting down, Good bye')
-            break
+        if "ida" in statement:
+            sentence="yes?"
+            speak(sentence)
+            main_data= write(statement, "IDA","main_talk", main_data, main_data_columns)
 
-        if 'wikipedia' in statement:
-            speak('Searching Wikipedia. What do you want me to find?')
-            statement = takeCommand()
-            if "no" in statement or "dont" in statement or "stop" in statement:
-                speak("Alright")
-                print("Wrong command")
-            else:
-                wikipedia = wiki_wiki.page(statement)
-                results = wikipedia.summary[0:500]
-                speak(f"According to Wikipedia: {results}")
-                print(results)
 
-        elif 'open youtube' in statement:
-            webbrowser.open_new_tab("https://www.youtube.com")
-            speak("youtube is open now")
-            time.sleep(5)
+            if "good bye" in statement or "ok bye" in statement or "stop" in statement:
+                speak('i am shutting down, Good bye')
+                print('i am shutting down, Good bye')
+                break
 
-        elif 'open google' in statement:
-            webbrowser.open_new_tab("https://www.google.com")
-            speak("Google chrome is open now")
-            time.sleep(5)
+            if 'wikipedia' in statement:
+                speak('Searching Wikipedia. What do you want me to find?')
+                statement = takeCommand()
+                if "no" in statement or "dont" in statement or "stop" in statement:
+                    speak("Alright")
+                    print("Wrong command")
+                else:
+                    wikipedia = wiki_wiki.page(statement)
+                    results = wikipedia.summary[0:500]
+                    speak(f"According to Wikipedia: {results}")
+                    print(results)
 
-        elif 'open gmail' in statement:
-            webbrowser.open_new_tab("gmail.com")
-            speak("Google Mail open now")
-            time.sleep(5)
+            elif 'open youtube' in statement or 'youtube' in statement:
+                browser('youtube')
 
-        elif "weather" in statement:
-            api_key = "8ef61edcf1c576d65d836254e11ea420"
-            base_url = "https://api.openweathermap.org/data/2.5/weather?"
-            speak("where do you want to check the weather")
-            city_name = takeCommand()
-            complete_url = base_url + "appid=" + api_key + "&q=" + city_name
-            response = requests.get(complete_url)
-            x = response.json()
-            if x["cod"] != "404":
-                y = x["main"]
-                current_temperature = y["temp"] - 273
-                current_humidiy = y["humidity"]
-                z = x["weather"]
-                weather_description = z[0]["description"]
-                speak(" Temperature is " +
-                      str(current_temperature)
-                      + "\n humidity in percentage is "
-                      + str(current_humidiy)
-                      + "\n description  "
-                      + str(weather_description))
-                print(" Temperature in celsius = " +
-                      str(current_temperature)
-                      + "\n humidity (in percentage) = "
-                      + str(current_humidiy)
-                      + "\n description = "
-                      + str(weather_description))
+            elif 'open google' in statement:
+                browser('google')
 
-            else:
-                speak(" City Not Found ")
+            elif 'open gmail' in statement:
+                browser('gmail')
 
-        elif 'time' in statement:
-            strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            speak(f"the time is {strTime}")
+            elif "weather" in statement:
+                api_key = "8ef61edcf1c576d65d836254e11ea420"
+                base_url = "https://api.openweathermap.org/data/2.5/weather?"
+                speak("where do you want to check the weather")
+                city_name = takeCommand()
+                complete_url = base_url + "appid=" + api_key + "&q=" + city_name
+                response = requests.get(complete_url)
+                x = response.json()
+                if x["cod"] != "404":
+                    y = x["main"]
+                    current_temperature = y["temp"] - 273
+                    current_humidiy = y["humidity"]
+                    z = x["weather"]
+                    weather_description = z[0]["description"]
+                    speak(" Temperature is " +
+                          str(current_temperature)
+                          + "\n humidity in percentage is "
+                          + str(current_humidiy)
+                          + "\n description  "
+                          + str(weather_description))
+                    print(" Temperature in celsius = " +
+                          str(current_temperature)
+                          + "\n humidity (in percentage) = "
+                          + str(current_humidiy)
+                          + "\n description = "
+                          + str(weather_description))
 
-        elif 'who are you' in statement or 'what can you do' in statement:
-            speak('I am IDA version 1 point O your personal assistant. I am programmed to minor tasks like'
-                  'openingyour browser ,tell the time,take a photo,search wikipedia,predict weather'
-                  'in different cities , get top headline news from times of india and you can ask me computational or geographical questions too!')
+                else:
+                    speak(" City Not Found ")
 
-        elif "who made you" in statement or "who created you" in statement or "who discovered you" in statement:
-            speak("I was built by Mirthula")
-            print("I was built by Mirthula")
+            elif 'time' in statement:
+                strTime = datetime.datetime.now().strftime("%H:%M:%S")
+                speak(f"the time is {strTime}")
 
-        elif "open stackoverflow" in statement:
-            webbrowser.open_new_tab("https://stackoverflow.com/login")
-            speak("Here is stackoverflow")
+            elif 'who are you' in statement or 'what can you do' in statement:
+                speak('I am IDA version 1 point O your personal assistant. I am programmed to minor tasks like'
+                      'openingyour browser ,tell the time,take a photo,search wikipedia,predict weather'
+                      'in different cities , get top headline news from times of india and you can ask me computational or geographical questions too!')
 
-        elif 'news' in statement:
-            news = webbrowser.open_new_tab(
-                "https://timesofindia.indiatimes.com/home/headlines")
-            speak('Here are some headlines from the Times of India,Happy reading')
-            time.sleep(6)
+            elif "who made you" in statement or "who created you" in statement or "who discovered you" in statement:
+                speak("I was built by Mirthula")
+                print("I was built by Mirthula")
 
-        elif "camera" in statement or "take a photo" in statement:
-            ec.capture(0, "robo camera", "img.jpg")
+            elif "open stackoverflow" in statement:
+                webbrowser.open_new_tab("https://stackoverflow.com/login")
+                speak("Here is stackoverflow")
 
-        elif 'search' in statement:
-            statement = statement.replace("search", "")
-            webbrowser.open_new_tab(statement)
-            time.sleep(5)
+            elif 'news' in statement:
+                news = webbrowser.open_new_tab(
+                    "https://timesofindia.indiatimes.com/home/headlines")
+                speak('Here are some headlines from the Times of India,Happy reading')
+                time.sleep(6)
 
-        elif 'ask' in statement:
-            speak('I can answer to computational and geographical questions and what question do you want to ask now')
-            question = takeCommand()
-            app_id = "R2K75H-7ELALHR35X"
-            client = wolframalpha.Client('R2K75H-7ELALHR35X')
-            res = client.query(question)
-            answer = next(res.results).text
-            speak(answer)
-            print(answer)
+            elif "camera" in statement or "take a photo" in statement:
+                ec.capture(0, "robo camera", "img.jpg")
 
-        elif "log off" in statement or "sign out" in statement:
-            speak(
-                "Ok , your pc will log off in 10 sec make sure you exit from all applications")
-            subprocess.call(["shutdown", "/l"])
+            elif 'search' in statement:
+                statement = statement.replace("search", "")
+                webbrowser.open_new_tab(statement)
+                time.sleep(5)
+
+            elif 'ask' in statement:
+                speak('I can answer to computational and geographical questions and what question do you want to ask now')
+                question = takeCommand()
+                app_id = "R2K75H-7ELALHR35X"
+                client = wolframalpha.Client('R2K75H-7ELALHR35X')
+                res = client.query(question)
+                answer = next(res.results).text
+                speak(answer)
+                print(answer)
+
+            elif "log off" in statement or "sign out" in statement:
+                speak(
+                    "Ok , your pc will log off in 10 sec make sure you exit from all applications")
+                subprocess.call(["shutdown", "/l"])
 
 time.sleep(2)
