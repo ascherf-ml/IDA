@@ -90,12 +90,6 @@ note_data_columns = ['note', 'date']
 note_data = pd.DataFrame(columns=note_data_columns)
 
 
-note= pd.DataFrame([['hello']], columns=note_data_columns)
-note= pd.DataFrame(['test',],columns=note_data_columns)
-note_data= note_data.append(note)
-main_data
-
-
 # =============================================================================
 # IDA functions
 # =============================================================================
@@ -106,38 +100,39 @@ def speak(text):
     engine.runAndWait()
 
 def write(input, source, command, database, database_col):
-    data = pd.DataFrame([[input, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), '', '']], columns=database_col)
+    data = pd.DataFrame([[input, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), source, command]], columns=database_col)
     database= database.append(data)
     return database
 
 def wishMe():
     global main_data
+    global main_data_columns
     hour = datetime.datetime.now().hour
     if hour >= 0 and hour < 10:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['morning_greet'])}")
         speak(sentence)
-        main_data= write(sentence, main_data, main_data_columns)
+        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
     elif hour >= 10 and hour < 13:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['midday_greet'])}")
         speak(sentence)
-        main_data= write(sentence, main_data, main_data_columns)
+        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
     elif hour >= 13 and hour < 17:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['afternoon_greet'])}")
         speak(sentence)
-        main_data= write(sentence, main_data, main_data_columns)
+        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
     elif hour >= 17 and hour < 20:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['evening_greet'])}")
         speak(sentence)
-        main_data= write(sentence, main_data, main_data_columns)
+        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
     else:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['night_greet'])}")
         speak(sentence)
-        main_data= write(sentence, main_data, main_data_columns)
+        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
 
 
 def takeCommand():
@@ -156,6 +151,7 @@ def takeCommand():
 
 speak("Ida is starting")
 wishMe()
+
 
 # =============================================================================
 # IDA main
