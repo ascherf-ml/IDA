@@ -43,8 +43,6 @@ todo_data = pd.DataFrame(columns=todo_data_columns)
 note_data_columns = ['note', 'date']
 note_data = pd.DataFrame(columns=note_data_columns)
 
-main_data
-
 # =============================================================================
 # IDA functions
 # =============================================================================

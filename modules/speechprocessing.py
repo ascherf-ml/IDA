@@ -104,3 +104,11 @@ phrases["greetings"] = (greetings)
 
 # set user name
 user = "alex"
+
+
+main_data_columns = ['text', 'time', 'source', 'command']
+main_data = pd.DataFrame(columns=main_data_columns)
+todo_data_columns = ['todo', 'date', 'priority']
+todo_data = pd.DataFrame(columns=todo_data_columns)
+note_data_columns = ['note', 'date']
+note_data = pd.DataFrame(columns=note_data_columns)
