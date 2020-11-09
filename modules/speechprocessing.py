@@ -5,6 +5,7 @@ import random
 
 
 def speak(text):
+    speech_engine()
     engine.say(text)
     engine.runAndWait()
 
@@ -55,3 +56,21 @@ def wishMe():
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['night_greet'])}")
         speak(sentence)
         main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
+
+def speech_engine():
+    engine = pyttsx3.init()
+    rate = engine.getProperty('rate')   # getting details of current speaking rate
+    engine.setProperty('rate', 180)     # setting up new voice rate
+
+
+    """VOLUME"""
+    volume = engine.getProperty('volume')  # getting to know current volume level (min=0 and max=1)
+    # setting up volume level  between 0 and 1
+    engine.setProperty('volume', 0.80)
+
+    """VOICE"""
+    voices = engine.getProperty('voices')  # getting details of current voice
+    # changing index, changes voices. 1 for english, 0 for german
+    engine.setProperty('voice', voices[0].id)
+
+    return engine

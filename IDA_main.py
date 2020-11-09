@@ -8,6 +8,7 @@ import os
 import time
 import subprocess
 import datetime
+import pyttsx3
 
 import json
 import random
@@ -20,9 +21,9 @@ import pandas as pd
 #import wolframalpha
 
 # local application libraries
-from modules.browser import browser
-import modules.weather
-import modules.speechprocessing
+from modules.browser import *
+from modules.weather import *
+from modules.speechprocessing import *
 
 
 
@@ -30,26 +31,9 @@ import modules.speechprocessing
 # Voice output settings
 # =============================================================================
 
-engine = pyttsx3.init()
+
+
 wiki_wiki = wikipediaapi.Wikipedia('en')
-""" RATE"""
-rate = engine.getProperty('rate')   # getting details of current speaking rate
-print(rate)  # printing current voice rate
-engine.setProperty('rate', 180)     # setting up new voice rate
-
-
-"""VOLUME"""
-volume = engine.getProperty(
-    'volume')  # getting to know current volume level (min=0 and max=1)
-print(volume)  # printing current volume level
-# setting up volume level  between 0 and 1
-engine.setProperty('volume', 0.80)
-
-"""VOICE"""
-voices = engine.getProperty('voices')  # getting details of current voice
-# changing index, changes voices. 1 for english, 0 for german
-engine.setProperty('voice', voices[0].id)
-
 
 # =============================================================================
 # Speech library
@@ -103,11 +87,11 @@ main_data
 # =============================================================================
 # IDA functions
 # =============================================================================
-
+speak('hello')
 
 webbrowser.register('firefox', None, webbrowser.BackgroundBrowser("C://Program Files//Mozilla Firefox//firefox.exe"))
 
-local_weather("Frankfurt")
+speak(local_weather("Frankfurt"))
 
 # =============================================================================
 # IDA main
