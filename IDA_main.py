@@ -172,36 +172,32 @@ if __name__ == '__main__':
         elif "weather" in statement:
             weather()
 
+        elif 'search' in statement:
+            statement = statement.replace("search", "")
+            statement = statement.replace("for", "")
+            browser(statement)
+
+        elif "open stackoverflow" in statement:
+            browser('stackoverflow')
+
+        elif 'show news' in statement:
+            browser('news.google')
+
 
         elif 'time' in statement:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"the time is {strTime}")
 
         elif 'who are you' in statement or 'what can you do' in statement:
-            speak('I am IDA version 1 point O your personal assistant. I am programmed to minor tasks like'
-                      'opening your browser ,tell the time,take a photo,search wikipedia,predict weather'
-                      'in different cities , get top headline news from times of india and you can ask me computational or geographical questions too!')
+            speak('I am IDA version 0 point 1. your personal assistant')
 
         elif "who made you" in statement or "who created you" in statement:
             speak("I was built by alex")
 
-        elif "open stackoverflow" in statement:
-            webbrowser.open_new_tab("https://stackoverflow.com/login")
-            speak("Here is stackoverflow")
-
-        elif 'news' in statement:
-            news = webbrowser.open_new_tab(
-                    "https://timesofindia.indiatimes.com/home/headlines")
-            speak('Here are some headlines from the Times of India,Happy reading')
-            time.sleep(6)
 
         elif "camera" in statement or "take a photo" in statement:
             ec.capture(0, "robo camera", "img.jpg")
 
-        elif 'search' in statement:
-            statement = statement.replace("search", "")
-            webbrowser.open_new_tab(statement)
-            time.sleep(5)
 
         elif 'ask' in statement:
             speak('I can answer to computational and geographical questions and what question do you want to ask now')
@@ -212,6 +208,7 @@ if __name__ == '__main__':
             answer = next(res.results).text
             speak(answer)
             print(answer)
+
 
         elif "log off" in statement or "sign out" in statement:
             speak(
