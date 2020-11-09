@@ -63,7 +63,7 @@ if __name__ == '__main__':
     global main_data
     speak('Hallo, ich bin Ida, dein persönlicher Assistent')
     time.sleep(2)
-    wishMe()
+    #wishMe()
     local_weather('Frankfurt')
 
     i = 0
