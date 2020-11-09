@@ -66,7 +66,6 @@ def weather():
 
     else:
         weather=(" City Not Found ")
-    return weather
 
 def local_weather(city):
     api_key = "8ef61edcf1c576d65d836254e11ea420"
@@ -127,4 +126,3 @@ def local_weather(city):
                      + str(current_humidiy)
                       + " Prozent und wir haben "
                       + str(weather_description))
-        return weather
