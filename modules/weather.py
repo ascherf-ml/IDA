@@ -128,5 +128,3 @@ def local_weather(city):
                       + " Prozent und wir haben "
                       + str(weather_description))
         return weather
-
-weather()
