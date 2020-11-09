@@ -85,7 +85,7 @@ afternoon_greet = ['Schönen nachmittag']
 evening_greet   = ['Guten abend']
 night_greet     = ['ganz schön spät']
 greet_followers = ['sonst noch etwas?', 'kann ich noch etwas für dich tun?']
-greet_questions = ['kann ich etwas für dich tun'?, 'was kann ich für dich tun?',
+greet_questions = ['kann ich etwas für dich tun?', 'was kann ich für dich tun?',
                    'was machen wir heute?', 'brauchst du hilfe bei etwas?', 'brauchst du etwas?',
                    'was sind die pläne für heute?', 'irgendetwas aufregendes heute für mich zu tun','was gibts']
 greetings       = ['hi', 'hey', 'hallo', 'was gibts', 'wie gehts',
