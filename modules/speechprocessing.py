@@ -23,7 +23,7 @@ def takeCommand():
             statement = r.recognize_google(audio, language='de-DE')
 
         except Exception as e:
-            #speak(f"Excuse me {user}, i didn't get that")
+            speak(f"Das habe ich nicht verstanden")
             return "None"
         return statement
 

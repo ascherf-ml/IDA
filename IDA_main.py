@@ -61,7 +61,7 @@ speak(local_weather("Frankfurt"))
 
 if __name__ == '__main__':
     global main_data
-    speak('I am ida. your personal assistant.')
+    speak('Hallo, ich bin Ida, dein persönlicher Assistent')
     time.sleep(2)
     wishMe()
     local_weather('Frankfurt')
@@ -76,67 +76,70 @@ if __name__ == '__main__':
         if statement == 0:
             continue
 
-        if "hi" in statement or 'hello' in statement:
+        if "hi" in statement or 'hallo' in statement or 'grüß dich' in statement:
             sentence=(f" {random.choice(phrases['greetings'])} {user}")
             speak(sentence)
             main_data= write(statement, "IDA","main_talk", main_data, main_data_columns)
 
-        if "thanks" in statement or 'thank you' in statement:
-            sentence=(f"you are welcome")
+        if "danke" in statement:
+            sentence=(f"Gerne")
             speak(sentence)
             main_data= write(statement, "IDA","main_talk", main_data, main_data_columns)
 
 
-        if "good bye" in statement or "goodbye" in statement or "ok bye" in statement or "shut down" in statement:
-            speak('i am shutting down, Good bye')
+        if "tschüss" in statement or "schalte dich ab" in statement or "das reicht für heute" in statement or "schalte dich aus" in statement:
+            speak(f'Ich schalte mich ab. bis zum nächsten mal {user}')
             main_data= write('shutting down', "IDA","main_talk", main_data, main_data_columns)
             break
 
         if 'wikipedia' in statement:
-            speak('Accessing Wikipedia. What do you want me to find?')
+            speak('Ich verbinde mich mit Wikipedia. Was soll ich für dich suchen?')
             statement = takeCommand()
-            if "no" in statement or "dont" in statement or "stop" in statement:
-                speak("Alright")
+            if "nein" in statement or "lass es" in statement or "hör auf" in statement:
+                speak("Ok")
                 print("Wrong command")
             else:
                 wikipedia = wiki_wiki.page(statement)
                 results = wikipedia.summary[0:500]
-                speak(f"According to Wikipedia: {results}")
+                speak(f"Wikipedia zufolge: {results}")
                 print(results)
 
-        elif 'open youtube' in statement or 'youtube' in statement:
+        elif 'öffne youtube' in statement or 'youtube' in statement:
             browser('youtube')
+            speak(f"Youtube ist jetzt offen")
 
-        elif 'open google' in statement:
+        elif 'öffne google' in statement:
             browser('google')
+            speak(f"Google ist jetzt offen")
 
-        elif 'open gmail' in statement:
+        elif 'öffne gmail' in statement or 'öffne google mail' in statement:
             browser('gmail')
+            speak(f"Gmail ist jetzt offen")
 
-        elif "weather" in statement:
+        elif "wetter" in statement:
             weather()
 
-        elif 'search' in statement:
-            statement = statement.replace("search", "")
-            statement = statement.replace("for", "")
+        elif 'suche nach' in statement:
+            statement = statement.replace("suche", "")
+            statement = statement.replace("nach", "")
             browser(statement)
 
-        elif "open stackoverflow" in statement:
+        elif "öffne stackoverflow" in statement:
             browser('stackoverflow')
 
-        elif 'show news' in statement:
+        elif 'nachrichten' in statement:
             browser('news.google')
 
 
-        elif 'time' in statement:
+        elif 'zeit' in statement or 'uhrzeit' in statement or 'uhr' in statement:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            speak(f"the time is {strTime}")
+            speak(f"Es ist {strTime}")
 
-        elif 'who are you' in statement or 'what can you do' in statement:
-            speak('I am IDA version 0 point 1. your personal assistant')
+        elif 'wer bist du' in statement:
+            speak('Ich bin Ida. Version 0 Punkt eins. Dein persönlicher assistent')
 
-        elif "who made you" in statement or "who created you" in statement:
-            speak("I was built by alex")
+        elif "dich gemacht" in statement or "erschaffen" in statement:
+            speak("Ich wurde von Alex gemacht")
 
 
         elif "camera" in statement or "take a photo" in statement:
