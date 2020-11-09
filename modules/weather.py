@@ -18,14 +18,51 @@ def weather():
         current_humidiy = y["humidity"]
         z = x["weather"]
         weather_description = z[0]["description"]
-        weather=(" Heute ist es  " +
-                 str(current_temperature)
-                 + " grad. Aber es fühlt sich eher nach "
-                 + str(feel_temperature)
-                 + " an . Luftfeuchtigkeit beträgt "
-                 + str(current_humidiy)
-                  + " Prozent und wir haben "
-                  + str(weather_description))
+        if feel_temperature <0:
+            speak(" Heute ist es  " +
+                     str(current_temperature)
+                     + "grad. Aber es fühlt sich eher nach "
+                     + str(feel_temperature)
+                     + "an. Es ist super kalt! Ich hoffe du hast eine warme Jacke eingepackt. Die Luftfeuchtigkeit beträgt "
+                     + str(current_humidiy)
+                      + " Prozent und wir haben "
+                      + str(weather_description))
+        elif feel_temperature >=0 and feel_temperature <10:
+            speak(" Heute ist es  " +
+                     str(current_temperature)
+                     + "grad. Aber es fühlt sich eher nach "
+                     + str(feel_temperature)
+                     + "an. Du brauchst heute auf jeden Fall eine warme Jacke. Die Luftfeuchtigkeit beträgt "
+                     + str(current_humidiy)
+                      + " Prozent und wir haben "
+                      + str(weather_description))
+        elif feel_temperature >=10 and feel_temperature <20:
+            speak(" Heute ist es  " +
+                     str(current_temperature)
+                     + "grad. Aber es fühlt sich eher nach "
+                     + str(feel_temperature)
+                     + "an. Es könnte wärmer sein, wenn du mich fragst. Die Luftfeuchtigkeit beträgt "
+                     + str(current_humidiy)
+                      + " Prozent und wir haben "
+                      + str(weather_description))
+        elif feel_temperature >=20 and feel_temperature <35:
+            speak(" Heute ist es  " +
+                     str(current_temperature)
+                     + "grad. Aber es fühlt sich eher nach "
+                     + str(feel_temperature)
+                     + "an. Schön warm. Die Luftfeuchtigkeit beträgt "
+                     + str(current_humidiy)
+                      + " Prozent und wir haben "
+                      + str(weather_description))
+        else:
+            speak(" Heute ist es  " +
+                     str(current_temperature)
+                     + "grad. Aber es fühlt sich eher nach "
+                     + str(feel_temperature)
+                     + "an. Mein Motherbord schwitzt. Die Luftfeuchtigkeit beträgt "
+                     + str(current_humidiy)
+                      + " Prozent und wir haben "
+                      + str(weather_description))
 
     else:
         weather=(" City Not Found ")
@@ -46,7 +83,7 @@ def local_weather(city):
         z = x["weather"]
         weather_description = z[0]["description"]
         if feel_temperature <0:
-            weather=(" Heute ist es  " +
+            speak(" Heute ist es  " +
                      str(current_temperature)
                      + "grad. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
@@ -55,7 +92,7 @@ def local_weather(city):
                       + " Prozent und wir haben "
                       + str(weather_description))
         elif feel_temperature >=0 and feel_temperature <10:
-            weather=(" Heute ist es  " +
+            speak(" Heute ist es  " +
                      str(current_temperature)
                      + "grad. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
@@ -64,7 +101,7 @@ def local_weather(city):
                       + " Prozent und wir haben "
                       + str(weather_description))
         elif feel_temperature >=10 and feel_temperature <20:
-            weather=(" Heute ist es  " +
+            speak(" Heute ist es  " +
                      str(current_temperature)
                      + "grad. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
@@ -73,7 +110,7 @@ def local_weather(city):
                       + " Prozent und wir haben "
                       + str(weather_description))
         elif feel_temperature >=20 and feel_temperature <35:
-            weather=(" Heute ist es  " +
+            speak(" Heute ist es  " +
                      str(current_temperature)
                      + "grad. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
@@ -82,7 +119,7 @@ def local_weather(city):
                       + " Prozent und wir haben "
                       + str(weather_description))
         else:
-            weather=(" Heute ist es  " +
+            speak(" Heute ist es  " +
                      str(current_temperature)
                      + "grad. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
@@ -91,3 +128,5 @@ def local_weather(city):
                       + " Prozent und wir haben "
                       + str(weather_description))
         return weather
+
+weather()

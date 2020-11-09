@@ -76,24 +76,20 @@ def speech_engine():
 
     return engine
 
-morning_greet   = ['Good Morning sunshine', 'good morning', 'morning', 'guten tag',
-                   'Rise and shine', 'Wakey, wakey, eggs and bakey', 'Good morning, Sleeping Beauty',
-                   'I thought you’d never wake up', 'Morning mi amigo!', 'Top o the mornin to ya', 'Rise and shine, its time for wine',
-                   'Good morning do you have coffee already', 'how was your night']
-midday_greet    = ['Nice to hear from you', 'good to hear you',
-                   'nice to hear you', 'its been a while']
-afternoon_greet = ['Good Afternoon']
-evening_greet   = ['Good Evening']
-night_greet     = ['You are still up?']
-greet_followers = ['anything else?', 'do you need help with something else?',
-                   'what else can i do', 'do you need help with something different',
-                   'Im ready if you are']
-greet_questions = ['Do you need something from me?', 'Is there something I can help you with?',
-                   'What are we doing today?', 'Do you need help?', 'You need something today?',
-                   'What are our plans for today', 'Do you have some exiting tasks for me?', 'Let me brighten your day',
-                   'Shoot']
-greetings       = ['hi', 'hey', 'hello', 'whats up', 'hows it going',
-                   'how are you', 'how have you been']
+morning_greet   = ['Guten Morgen', 'guten morgen sonnenschein', 'morgen!', 'einen guten morgen',
+                   'Gut geschlafen?', 'wie war deine nacht?',
+                   'Guten morgen, hattest du schon einen Kaffee']
+midday_greet    = ['Schön dich zu hören', 'schön von dir zu hören',
+                   'grüß dich', 'hallo']
+afternoon_greet = ['Schönen nachmittag']
+evening_greet   = ['Guten abend']
+night_greet     = ['ganz schön spät']
+greet_followers = ['sonst noch etwas?', 'kann ich noch etwas für dich tun?']
+greet_questions = ['kann ich etwas für dich tun'?, 'was kann ich für dich tun?',
+                   'was machen wir heute?', 'brauchst du hilfe bei etwas?', 'brauchst du etwas?',
+                   'was sind die pläne für heute?', 'irgendetwas aufregendes heute für mich zu tun','was gibts']
+greetings       = ['hi', 'hey', 'hallo', 'was gibts', 'wie gehts',
+                   'wie gehts dir']
 
 # create library and add phrases
 phrases = {}
