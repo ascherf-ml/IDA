@@ -3,25 +3,24 @@
 # =============================================================================
 
 # standard libraries
-import webbrowser
+
 import os
 import time
 import subprocess
 import datetime
+
 import json
-import requests
 import random
 
 # third party libraries
-import speech_recognition as sr
-import pyttsx3
+
 import wikipediaapi
 import pandas as pd
 #from ecapture import ecapture as ec
 #import wolframalpha
 
 # local application libraries
-import modules.browser
+from modules.browser import browser
 import modules.weather
 import modules.speechprocessing
 
@@ -31,7 +30,7 @@ import modules.speechprocessing
 # Voice output settings
 # =============================================================================
 
-engine = pyttsx3.init('sapi5')
+engine = pyttsx3.init()
 wiki_wiki = wikipediaapi.Wikipedia('en')
 """ RATE"""
 rate = engine.getProperty('rate')   # getting details of current speaking rate
@@ -49,7 +48,7 @@ engine.setProperty('volume', 0.80)
 """VOICE"""
 voices = engine.getProperty('voices')  # getting details of current voice
 # changing index, changes voices. 1 for english, 0 for german
-engine.setProperty('voice', voices[1].id)
+engine.setProperty('voice', voices[0].id)
 
 
 # =============================================================================

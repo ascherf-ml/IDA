@@ -1,3 +1,5 @@
+import requests
+
 def weather():
     api_key = "8ef61edcf1c576d65d836254e11ea420"
     base_url = "https://api.openweathermap.org/data/2.5/weather?"
