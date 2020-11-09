@@ -4,7 +4,7 @@ import requests
 def weather():
     api_key = "8ef61edcf1c576d65d836254e11ea420"
     base_url = "https://api.openweathermap.org/data/2.5/weather?"
-    speak=("where do you want to check the weather")
+    speak=("wo soll ich nach dem wetter schauen?")
     city_name = takeCommand()
     complete_url = base_url + "appid=" + api_key + "&q=" + city_name
     response = requests.get(complete_url)
@@ -16,13 +16,13 @@ def weather():
         current_humidiy = y["humidity"]
         z = x["weather"]
         weather_description = z[0]["description"]
-        weather=(" Today the temperature is " +
+        weather=(" Heute ist es  " +
                  str(current_temperature)
-                 + "\n but it feels more like "
+                 + " grad Celsius. Aber es fühlt sich eher nach "
                  + str(feel_temperature)
-                 + "\n . the humidity in percentage is "
+                 + " an . Luftfeuchtigkeit beträgt "
                  + str(current_humidiy)
-                  + "\n and we have "
+                  + " Prozent und wir haben "
                   + str(weather_description))
 
     else:
@@ -44,48 +44,48 @@ def local_weather(city):
         z = x["weather"]
         weather_description = z[0]["description"]
         if feel_temperature <0:
-            weather=(" Today the temperature is " +
+            weather=(" Heute ist es  " +
                      str(current_temperature)
-                     + "\n but it feels more like "
+                     + "grad Celsius. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
-                     + "its freezing! did you bring a warm jacket? The humidity in percentage is "
+                     + "an. Es ist super kalt! Ich hoffe du hast eine warme Jacke eingepackt. Die Luftfeuchtigkeit beträgt "
                      + str(current_humidiy)
-                      + "\n and we have "
+                      + " Prozent und wir haben "
                       + str(weather_description))
         elif feel_temperature >=0 and feel_temperature <10:
-            weather=(" Today the temperature is " +
+            weather=(" Heute ist es  " +
                      str(current_temperature)
-                     + "\n but it feels more like "
+                     + "grad Celsius. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
-                     + ". Its cold. the humidity in percentage is "
+                     + "an. Du brauchst heute auf jeden Fall eine warme Jacke. Die Luftfeuchtigkeit beträgt "
                      + str(current_humidiy)
-                      + "\n and we have "
+                      + " Prozent und wir haben "
                       + str(weather_description))
         elif feel_temperature >=10 and feel_temperature <20:
-            weather=(" Today the temperature is " +
+            weather=(" Heute ist es  " +
                      str(current_temperature)
-                     + "\n but it feels more like "
+                     + "grad Celsius. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
-                     + ". Could be warmer, if you ask me. the humidity in percentage is "
+                     + "an. Es könnte wärmer sein, wenn du mich fragst. Die Luftfeuchtigkeit beträgt "
                      + str(current_humidiy)
-                      + "\n and we have "
+                      + " Prozent und wir haben "
                       + str(weather_description))
         elif feel_temperature >=20 and feel_temperature <35:
-            weather=(" Today the temperature is " +
+            weather=(" Heute ist es  " +
                      str(current_temperature)
-                     + "\n but it feels more like "
+                     + "grad Celsius. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
-                     + ". Warm and nice. the humidity in percentage is "
+                     + "an. Schön warm. Die Luftfeuchtigkeit beträgt "
                      + str(current_humidiy)
-                      + "\n and we have "
+                      + " Prozent und wir haben "
                       + str(weather_description))
         else:
-            weather=(" Today the temperature is " +
+            weather=(" Heute ist es  " +
                      str(current_temperature)
-                     + "\n but it feels more like "
+                     + "grad Celsius. Aber es fühlt sich eher nach "
                      + str(feel_temperature)
-                     + ". Im melting. Can you get me a fan? The humidity in percentage is "
+                     + "an. Mein Motherbord schwitzt. Die Luftfeuchtigkeit beträgt "
                      + str(current_humidiy)
-                      + "\n and we have "
+                      + " Prozent und wir haben "
                       + str(weather_description))
         return weather

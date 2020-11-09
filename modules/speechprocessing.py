@@ -5,7 +5,7 @@ import random
 
 
 def speak(text):
-    speech_engine()
+    engine = speech_engine()
     engine.say(text)
     engine.runAndWait()
 
