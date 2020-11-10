@@ -21,3 +21,4 @@ def database_export():
 
 def database_import():
     main_data = pd.read_csv('data/main_data.csv',sep=',')
+    return main_data

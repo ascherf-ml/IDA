@@ -24,24 +24,17 @@ import pandas as pd
 from modules.browser import *
 from modules.weather import *
 from modules.speechprocessing import *
+from modules.database import *
 
 
 
 # =============================================================================
-# Voice output settings
+# setting up databases
 # =============================================================================
-
+database_import()
+main_data
 wiki_wiki = wikipediaapi.Wikipedia('en')
 
-# =============================================================================
-# IDA Databases
-# =============================================================================
-main_data_columns = ['text', 'time', 'source', 'command']
-main_data = pd.DataFrame(columns=main_data_columns)
-todo_data_columns = ['todo', 'date', 'priority']
-todo_data = pd.DataFrame(columns=todo_data_columns)
-note_data_columns = ['note', 'date']
-note_data = pd.DataFrame(columns=note_data_columns)
 
 # =============================================================================
 # IDA functions
