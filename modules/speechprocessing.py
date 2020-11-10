@@ -16,6 +16,7 @@ def speak(text):
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source)
         audio = r.listen(source)
 
         try:
@@ -23,6 +24,19 @@ def takeCommand():
 
         except Exception as e:
             speak(f"Das habe ich nicht verstanden")
+            return "None"
+        return statement
+
+def background_listening():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source)
+        audio = r.listen(source)
+
+        try:
+            statement = r.recognize_google(audio, language='de-DE')
+
+        except Exception as e:
             return "None"
         return statement
 
