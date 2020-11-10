@@ -8,6 +8,7 @@ def database_create():
     todo_data = pd.DataFrame(columns=todo_data_columns)
     note_data_columns = ['note', 'date']
     note_data = pd.DataFrame(columns=note_data_columns)
+    return main_data, main_data_columns
 
 def write(input, source, command, database, database_col):
     data = pd.DataFrame([[input, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), source, command]], columns=database_col)
