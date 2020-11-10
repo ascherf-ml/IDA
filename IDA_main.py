@@ -31,8 +31,8 @@ from modules.database import *
 # =============================================================================
 # setting up databases
 # =============================================================================
-database_import()
-main_data
+main_data= database_import()
+
 wiki_wiki = wikipediaapi.Wikipedia('en')
 
 
