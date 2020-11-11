@@ -7,6 +7,7 @@ import time
 
 from modules.database import *
 
+database_create()
 
 def speak(text):
     engine = speech_engine()
