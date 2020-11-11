@@ -118,3 +118,7 @@ phrases["greetings"] = (greetings)
 
 # set user name
 user = "alex"
+
+test=['morgen!']
+[i for i in L1 if i in L2
+[i for i in morning_greet if i in test]

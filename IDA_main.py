@@ -71,6 +71,11 @@ if __name__ == '__main__':
         if statement == 0:
             continue
 
+        if "tschüss" in statement or "schalte dich ab" in statement or "das reicht für heute" in statement or "schalte dich aus" in statement:
+            speak(f'Ich schalte mich ab. bis zum nächsten mal {user}')
+            main_data= write('shutting down', "IDA","main_talk", main_data, main_data_columns)
+            break
+
         if "start" in statement or "hey" in statement or "hi" in statement or "hallo" in statement or "ida" in statement:
             playsound('sound/Bing-sound.mp3')
 
@@ -94,10 +99,10 @@ if __name__ == '__main__':
                     sentence=(f"Gerne")
                     speak(sentence)
                     main_data= write(statement, "IDA","main_talk", main_data, main_data_columns)
+                    break
 
-
-                if "tschüss" in statement or "schalte dich ab" in statement or "das reicht für heute" in statement or "schalte dich aus" in statement:
-                    speak(f'Ich schalte mich ab. bis zum nächsten mal {user}')
+                if "ich brauche nichts" in statement or "das reicht für jetzt" in statement or "schalte dich ab" in statement or "passiven modus" in statement:
+                    speak(f'Alles klar {user}')
                     main_data= write('shutting down', "IDA","main_talk", main_data, main_data_columns)
                     break
 
@@ -135,9 +140,11 @@ if __name__ == '__main__':
 
                 elif "öffne stackoverflow" in statement:
                     browser('stackoverflow')
+                    speak(f"Stackoverflow ist jetzt offen")
 
                 elif 'nachrichten' in statement:
                     browser('news.google')
+                    speak(f"Hier sind die google Nachrichten")
 
 
                 elif 'zeit' in statement or 'uhrzeit' in statement or 'uhr' in statement:
