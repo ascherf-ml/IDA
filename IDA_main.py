@@ -80,7 +80,7 @@ if __name__ == '__main__':
             playsound('sound/Bing-sound.mp3')
 
             while True:
-                timeout = time.time() + 60*5
+                timeout = time.time() + 30
                 if time.time() > timeout:
                     break
 

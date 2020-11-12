@@ -10,8 +10,6 @@ from modules.config import *
 
 database_create()
 
-# set user name
-print(user)
 
 def speak(text):
     engine = speech_engine()
@@ -121,7 +119,16 @@ phrases["greet_questions"] = (greet_questions)
 phrases["greetings"] = (greetings)
 
 
-
 test=['morgen!']
 if [i for i in morning_greet if i in test]!=[]:
     print("hallo")
+
+engine=speech_engine()
+voices = engine.getProperty('voices')
+for voice in voices:
+    print("Voice: %s" % voice.name)
+    print(" - ID: %s" % voice.id)
+    print(" - Languages: %s" % voice.languages)
+    print(" - Gender: %s" % voice.gender)
+    print(" - Age: %s" % voice.age)
+    print("\n")
