@@ -1,9 +1,12 @@
 import speech_recognition as sr
-import pyttsx3
 import datetime
 import random
 import pandas as pd
 import time
+
+import boto3
+import io
+import pygame
 
 from modules.database import *
 from modules.config import *
@@ -11,10 +14,26 @@ from modules.config import *
 database_create()
 
 
-def speak(text):
-    engine = speech_engine()
-    engine.say(text)
-    engine.runAndWait()
+def speak_ssml(message):
+    polly = boto3.client('polly')
+    response = polly.synthesize_speech(OutputFormat='mp3', VoiceId='Vicki',TextType='ssml',
+                 Text=message)
+    audio = io.BytesIO(response['AudioStream'].read())
+    pygame.mixer.music.load(audio)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+
+def speak(message):
+    polly = boto3.client('polly')
+    response = polly.synthesize_speech(OutputFormat='mp3', VoiceId='Vicki',
+                 Text=message)
+    audio = io.BytesIO(response['AudioStream'].read())
+    pygame.mixer.music.load(audio)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+
 
 def takeCommand():
     r = sr.Recognizer()
@@ -74,23 +93,6 @@ def wishMe():
         speak(sentence)
         main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
 
-def speech_engine():
-    engine = pyttsx3.init()
-    rate = engine.getProperty('rate')   # getting details of current speaking rate
-    engine.setProperty('rate', 180)     # setting up new voice rate
-
-
-    """VOLUME"""
-    volume = engine.getProperty('volume')  # getting to know current volume level (min=0 and max=1)
-    # setting up volume level  between 0 and 1
-    engine.setProperty('volume', 0.80)
-
-    """VOICE"""
-    voices = engine.getProperty('voices')  # getting details of current voice
-    # changing index, changes voices. 1 for english, 0 for german
-    engine.setProperty('voice', voices[0].id)
-
-    return engine
 
 morning_greet   = ['Guten Morgen', 'guten morgen sonnenschein', 'morgen!', 'einen guten morgen',
                    'Gut geschlafen?', 'wie war deine nacht?',
@@ -122,13 +124,3 @@ phrases["greetings"] = (greetings)
 test=['morgen!']
 if [i for i in morning_greet if i in test]!=[]:
     print("hallo")
-
-engine=speech_engine()
-voices = engine.getProperty('voices')
-for voice in voices:
-    print("Voice: %s" % voice.name)
-    print(" - ID: %s" % voice.id)
-    print(" - Languages: %s" % voice.languages)
-    print(" - Gender: %s" % voice.gender)
-    print(" - Age: %s" % voice.age)
-    print("\n")
