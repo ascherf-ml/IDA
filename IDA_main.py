@@ -35,7 +35,7 @@ from modules.database import *
 # =============================================================================
 main_data= database_create()
 
-wiki_wiki = wikipediaapi.Wikipedia('en')
+
 
 main_data_columns = ['text', 'time', 'source', 'command']
 main_data = pd.DataFrame(columns=main_data_columns)
@@ -111,12 +111,12 @@ if __name__ == '__main__':
                     statement = takeCommand()
                     if "nein" in statement or "lass es" in statement or "hör auf" in statement:
                         speak("Ok")
-                        print("Wrong command")
+
                     else:
                         wikipedia = wiki_wiki.page(statement)
                         results = wikipedia.summary[0:500]
                         speak(f"Wikipedia zufolge: {results}")
-                        print(results)
+
 
                 elif 'öffne youtube' in statement or 'youtube' in statement:
                     browser('youtube')

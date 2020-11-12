@@ -6,8 +6,12 @@ import pandas as pd
 import time
 
 from modules.database import *
+from modules.config import *
 
 database_create()
+
+# set user name
+print(user)
 
 def speak(text):
     engine = speech_engine()
@@ -116,9 +120,8 @@ phrases["greet_followers"] = (greet_followers)
 phrases["greet_questions"] = (greet_questions)
 phrases["greetings"] = (greetings)
 
-# set user name
-user = "alex"
+
 
 test=['morgen!']
-[i for i in L1 if i in L2
-[i for i in morning_greet if i in test]
+if [i for i in morning_greet if i in test]!=[]:
+    print("hallo")
