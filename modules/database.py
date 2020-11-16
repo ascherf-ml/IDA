@@ -22,6 +22,7 @@ def write(input, source, command, database, database_col):
     return database
 
 def write_note(input):
+    note_data_columns = ['note', 'date']
     data = pd.DataFrame([[input, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())]], columns=note_data_columns)
     database= note_data.append(data)
     return database

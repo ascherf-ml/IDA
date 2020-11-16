@@ -1,12 +1,12 @@
+import pandas as pd
+import time
+
 from modules.database import *
 from modules.config import *
 from modules.speechprocessing import *
 
-note_data= note_database_import()
-
-note_data= note_database_create()
-
-
+note_data_columns = ['note', 'date']
+note_data = pd.DataFrame(columns=note_data_columns)
 
 def notebook():
     while True:
