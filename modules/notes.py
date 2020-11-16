@@ -15,7 +15,7 @@ def notebook():
     note_data = pd.read_csv('data/note_data.csv',sep=',')
     speak('Dein Notizbuch ist offen, was soll ich tun?')
     statement = takeCommand()
-        
+
     while True:
 
         speak('Dein Notizbuch ist offen, was soll ich tun?')
@@ -29,6 +29,7 @@ def notebook():
             while True:
                 speak('Willst du noch noch eine Notiz anlegen?')
                 statement = takeCommand()
+
                 if "ja" in statement or "gerne" in statement:
                     speak('Was soll ich notieren?')
                     statement = takeCommand()
