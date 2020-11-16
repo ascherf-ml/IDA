@@ -11,7 +11,7 @@ import pygame
 from modules.database import *
 from modules.config import *
 
-database_create()
+main_data= main_database_create()
 
 
 def speak_ssml(message):
@@ -119,8 +119,3 @@ phrases["night_greet"] = (night_greet)
 phrases["greet_followers"] = (greet_followers)
 phrases["greet_questions"] = (greet_questions)
 phrases["greetings"] = (greetings)
-
-
-test=['morgen!']
-if [i for i in morning_greet if i in test]!=[]:
-    print("hallo")
