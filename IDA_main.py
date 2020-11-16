@@ -27,6 +27,7 @@ from modules.browser import *
 from modules.weather import *
 from modules.speechprocessing import *
 from modules.database import *
+from modules.notes import *
 
 
 
@@ -105,6 +106,10 @@ if __name__ == '__main__':
                     speak(f'Alles klar {user}')
                     main_data= write('shutting down', "IDA","main_talk", main_data, main_data_columns)
                     break
+
+                if "Notizbuch" in statement or "Notiz" in statement:
+                    notebook()
+
 
                 if 'wikipedia' in statement:
                     speak('Ich verbinde mich mit Wikipedia. Was soll ich für dich suchen?')
