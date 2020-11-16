@@ -42,8 +42,7 @@ main_data_columns = ['text', 'time', 'source', 'command']
 main_data = pd.DataFrame(columns=main_data_columns)
 todo_data_columns = ['todo', 'date', 'priority']
 todo_data = pd.DataFrame(columns=todo_data_columns)
-note_data_columns = ['note', 'date']
-note_data = pd.DataFrame(columns=note_data_columns)
+
 
 # =============================================================================
 # IDA functions
@@ -62,7 +61,7 @@ speak(local_weather("Frankfurt"))
 if __name__ == '__main__':
     global main_data
     #wishMe()
-    #local_weather('Frankfurt')
+    local_weather('Frankfurt')
 
 
     while True:
@@ -88,6 +87,7 @@ if __name__ == '__main__':
                 statement = takeCommand().lower()
                 main_data= write(statement, "user","main_talk", main_data, main_data_columns)
 
+
                 if statement == 0:
                     continue
 
@@ -105,9 +105,10 @@ if __name__ == '__main__':
                 if "ich brauche nichts" in statement or "das reicht für jetzt" in statement or "schalte dich ab" in statement or "passiven modus" in statement:
                     speak(f'Alles klar {user}')
                     main_data= write('shutting down', "IDA","main_talk", main_data, main_data_columns)
+                    main_data
                     break
 
-                if "Notizbuch" in statement or "Notiz" in statement:
+                if "notizbuch" in statement or "notiz" in statement:
                     notebook()
 
 
