@@ -11,6 +11,9 @@ import pygame
 from modules.database import *
 from modules.config import *
 
+pygame.init()
+pygame.mixer.init()
+
 main_data= main_database_create()
 
 
