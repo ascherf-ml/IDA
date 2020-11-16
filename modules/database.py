@@ -13,6 +13,7 @@ def todo_database_create():
 def note_database_create():
     note_data_columns = ['note', 'date']
     note_data = pd.DataFrame(columns=note_data_columns)
+    return note_data, note_data_columns
 
 
 def write(input, source, command, database, database_col):
