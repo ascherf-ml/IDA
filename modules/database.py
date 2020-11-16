@@ -4,7 +4,7 @@ import time
 def main_database_create():
     main_data_columns = ['text', 'time', 'source', 'command']
     main_data = pd.DataFrame(columns=main_data_columns)
-    return main_data, main_data_columns
+
 
 def todo_database_create():
     todo_data_columns = ['todo', 'date', 'priority']
@@ -13,7 +13,6 @@ def todo_database_create():
 def note_database_create():
     note_data_columns = ['note', 'date']
     note_data = pd.DataFrame(columns=note_data_columns)
-    return note_data, note_data_columns
 
 
 def write(input, source, command, database, database_col):

@@ -6,7 +6,8 @@ from modules.config import *
 from modules.speechprocessing import *
 
 note_data_columns = ['note', 'date']
-note_data = pd.DataFrame(columns=note_data_columns)
+note_data = note_database_create()
+
 
 def notebook():
     while True:
