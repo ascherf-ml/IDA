@@ -3,18 +3,14 @@
 # =============================================================================
 
 # standard libraries
-
 import os
 import time
 import subprocess
 import datetime
-import pyttsx3
-
 import json
 import random
 
 # third party libraries
-
 import wikipediaapi
 import pandas as pd
 from playsound import playsound
@@ -26,34 +22,34 @@ from playsound import playsound
 from modules.browser import *
 from modules.weather import *
 from modules.speechprocessing import *
-from modules.database import *
 from modules.notes import *
+from modules.config import *
 
 
 
 # =============================================================================
 # setting up databases
 # =============================================================================
-main_data= main_database_create()
-main_data_columns = main_database_columns_create()
-
-
 
 main_data_columns = ['text', 'time', 'source', 'command']
 main_data = pd.DataFrame(columns=main_data_columns)
-todo_data_columns = ['todo', 'date', 'priority']
-todo_data = pd.DataFrame(columns=todo_data_columns)
-
-
+main_data.to_csv('data/main_data.csv', index=False)
 
 # =============================================================================
 # IDA functions
 # =============================================================================
-speak('hallo')
+def write_main(input, source, command):
+    main_data = pd.read_csv('data/main_data.csv',sep=',')
+    main_data_columns = ['text', 'time', 'source', 'command']
+    data = pd.DataFrame([[input, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), source, command]], columns=main_data_columns)
+    new_input= main_data.append(data)
+    new_input.to_csv('data/main_data.csv',index=False)
+    return new_input
 
 webbrowser.register('firefox', None, webbrowser.BackgroundBrowser("C://Program Files//Mozilla Firefox//firefox.exe"))
 
 speak(local_weather("Frankfurt"))
+
 
 # =============================================================================
 # IDA main
@@ -61,7 +57,7 @@ speak(local_weather("Frankfurt"))
 
 
 if __name__ == '__main__':
-    global main_data
+    main_data = pd.read_csv('data/main_data.csv',sep=',')
     #wishMe()
     local_weather('Frankfurt')
 

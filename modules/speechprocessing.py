@@ -1,21 +1,32 @@
-import speech_recognition as sr
+# =============================================================================
+# Imports
+# =============================================================================
+
+# standard libraries
 import datetime
 import random
-import pandas as pd
 import time
-
-import boto3
 import io
-import pygame
 
+# third party libraries
+import boto3
+import pandas as pd
+import pygame
+import speech_recognition as sr
+
+# local application libraries
 from modules.database import *
 from modules.config import *
 
+# =============================================================================
+# Speech unit configuration
+# =============================================================================
 pygame.init()
 pygame.mixer.init()
 
-main_data= main_database_create()
-
+# =============================================================================
+# speech functions
+# =============================================================================
 
 def speak_ssml(message):
     polly = boto3.client('polly')
@@ -74,28 +85,27 @@ def wishMe():
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['morning_greet'])}")
         speak(sentence)
-        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
     elif hour >= 10 and hour < 13:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['midday_greet'])}")
         speak(sentence)
-        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
     elif hour >= 13 and hour < 17:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['afternoon_greet'])}")
         speak(sentence)
-        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
     elif hour >= 17 and hour < 20:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['evening_greet'])}")
         speak(sentence)
-        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
     else:
         sentence=(
             f" {random.choice(phrases['greetings'])} {user}. {random.choice(phrases['night_greet'])}")
         speak(sentence)
-        main_data= write(sentence,"IDA","wishme", main_data, main_data_columns)
 
+
+# =============================================================================
+# speech library
+# =============================================================================
 
 morning_greet   = ['Guten Morgen', 'guten morgen sonnenschein', 'morgen!', 'einen guten morgen',
                    'Gut geschlafen?', 'wie war deine nacht?',

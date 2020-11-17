@@ -1,15 +1,26 @@
+# =============================================================================
+# Imports
+# =============================================================================
+# standard libraries
 import pandas as pd
 import time
 import numpy as np
 
-from modules.database import *
+# local application libraries
 from modules.config import *
 from modules.speechprocessing import *
-# create note database (ONLY ONCE)
+
+# =============================================================================
+# setting up database (ONLY ONCE)
+# =============================================================================
+
 note_data_columns = ['note', 'date', 'short_date']
 note_data = pd.DataFrame(columns=note_data_columns)
 note_data.to_csv('data/note_data.csv', index=False)
 
+# =============================================================================
+# notebook functions
+# =============================================================================
 def write_note(input):
     note_data = pd.read_csv('data/note_data.csv',sep=',')
     note_data_columns = ['note', 'date', 'short_date']
@@ -18,6 +29,9 @@ def write_note(input):
     new_note.to_csv('data/note_data.csv',index=False)
     return new_note
 
+# =============================================================================
+# notebook main
+# =============================================================================
 def notebook():
     note_data = pd.read_csv('data/note_data.csv',sep=',')
     speak('Dein Notizbuch ist offen, was soll ich tun?')

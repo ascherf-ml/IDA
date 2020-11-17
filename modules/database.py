@@ -1,13 +1,6 @@
 import pandas as pd
 import time
 
-def main_database_columns_create():
-    main_data_columns = ['text', 'time', 'source', 'command']
-
-def main_database_create():
-    main_data = pd.DataFrame(columns=main_data_columns)
-
-
 def todo_database_create():
     todo_data_columns = ['todo', 'date', 'priority']
     todo_data = pd.DataFrame(columns=todo_data_columns)
