@@ -34,7 +34,8 @@ from modules.notes import *
 # =============================================================================
 # setting up databases
 # =============================================================================
-main_data= database_create()
+main_data= main_database_create()
+main_data_columns = main_database_columns_create()
 
 
 
@@ -42,6 +43,7 @@ main_data_columns = ['text', 'time', 'source', 'command']
 main_data = pd.DataFrame(columns=main_data_columns)
 todo_data_columns = ['todo', 'date', 'priority']
 todo_data = pd.DataFrame(columns=todo_data_columns)
+
 
 
 # =============================================================================
