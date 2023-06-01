@@ -49,6 +49,8 @@ webbrowser.register('firefox', None, webbrowser.BackgroundBrowser("C://Program F
 
 speak(local_weather("Frankfurt"))
 
+print("")
+
 
 # =============================================================================
 # IDA main
